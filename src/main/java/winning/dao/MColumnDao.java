@@ -18,4 +18,5 @@ public interface MColumnDao {
     int updateColumn(MColumn column);
     int deleteColumnById(@Param("id") String id);
     int insertColumn(MColumn column);
+    List<Map> getArticlesByMcid(@Param("mcid") String mcid);
 }

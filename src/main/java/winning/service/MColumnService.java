@@ -1,13 +1,16 @@
 package winning.service;
 
-import winning.bean.MColumn;
-import winning.dao.MColumnDao;
-import winning.util.JsonUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedCaseInsensitiveMap;
+import winning.bean.MColumn;
+import winning.dao.MColumnDao;
+import winning.util.JsonUtils;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +36,30 @@ public class MColumnService {
     public Map getColumnsByTmid(Map<String, String> paramMap) {
 
         Map map=new LinkedCaseInsensitiveMap();
+        List<Map> columnList = new ArrayList<Map>();
         List<Map> list =  mColumnDao.getColumnsByTmid(paramMap.get("TMID"));
-        map.put("COLUMN_LIST", list);
+
+        if(list != null && !list.isEmpty()){
+
+            for(Map column : list) {
+
+                Map columnMap = new HashMap();
+                //将MCID转成String类型
+                column.put("MCID",((BigDecimal)column.get("MCID")).toString());
+                List<Map> articles = mColumnDao.getArticlesByMcid((String) column.get("MCID"));
+                if(articles != null && !articles.isEmpty()) {
+                    for(Map article : articles){
+                        //将AID转成String类型
+                        article.put("AID", ((BigDecimal)article.get("AID")).toString());
+                    }
+                    columnMap.put("ARTICLE_LIST", articles);
+                }
+                columnMap.put("COLUMN", column);
+                columnList.add(columnMap);
+            }
+        }
+
+        map.put("COLUMN_LIST", columnList);
         return map;
     }
 
