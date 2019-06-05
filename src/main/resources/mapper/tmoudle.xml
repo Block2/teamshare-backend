@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="winning.dao.TModuleDao">
+
+    <select id="getAllModules" resultType="java.util.Map">
+        SELECT TMID, TMNAME, TMCOMMENT FROM TModule
+    </select>
+
+
+    <update id="updateModule" parameterType="winning.bean.TModule">
+        UPDATE TModule SET TMNAME  = #{name}, TMCOMMENT = #{comment} WHERE　TMID = #{id}
+    </update>
+
+    <delete id="deleteModuleById" parameterType="java.lang.String">
+        DELETE TModule WHERE TMID = #{id}
+    </delete>
+
+    <insert id="insertModule" parameterType="winning.bean.TModule">
+        INSERT INTO TModule (TMNAME, TMCOMMENT) VALUES (#{name}, #{comment})
+    </insert>
+
+</mapper>

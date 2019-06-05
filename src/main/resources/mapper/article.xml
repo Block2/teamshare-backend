@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="winning.dao.ArticleDao">
+
+    <select id="getArticlesByMcid" parameterType="java.lang.String" resultType="java.util.Map">
+        SELECT AID, TITLE FROM ARTICLE WHERE MCID = #{mcid}
+    </select>
+
+    <select id="getArticleById" parameterType="java.lang.String" resultType="java.util.Map">
+        SELECT AID, TITLE, TAG, AUTHOR, ACOMMENT, CREATETIME, BODYPART, IMAGES, ATTACHMENTS, MCID FROM ARTICLE WHERE AID = #{id}
+    </select>
+
+    <update id="updateArticle" parameterType="winning.bean.Article">
+        UPDATE ARTICLE SET TITLE = #{title}, TAG = #{tag}, AUTHOR = #{author}, ACOMMENT = #{acomment}, CREATETIME = #{createTime},
+        BODYPART = #{bodypart}, IMAGES = #{images}, ATTACHMENTS = #{attachments}, MCID = #{mcId}  WHERE AID = #{ad}
+    </update>
+
+    <delete id="deleteArticleById" parameterType="java.lang.String">
+        DELETE ARTICLE WHERE AID = #{id}
+    </delete>
+
+    <insert id="insertArticle" parameterType="winning.bean.Article">
+        INSERT INTO ARTICLE (TITLE, TAG, AUTHOR,ACOMMENT, BODYPART, IMAGES, ATTACHMENTS, MCID) VALUES
+        (#{title}, #{tag}, #{author}, #{acomment}, #{bodypart}, #{images}, #{attachments}, #{mcId})
+    </insert>
+
+</mapper>

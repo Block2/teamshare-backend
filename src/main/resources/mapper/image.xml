@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="winning.dao.ImageDao">
+
+    <select id="getImageById" parameterType="java.lang.String" resultType="winning.bean.Image">
+        SELECT * FROM IMAGE WHERE IID = #{id}
+    </select>
+
+    <update id="updateImage" parameterType="winning.bean.Image">
+        UPDATE IMAGE SET IFILEPATH = #{iFilePath}, IURL = #{iUrl} , INAME = #{iName} WHERE　IID = #{iId}
+    </update>
+
+    <delete id="deleteImageById" parameterType="java.lang.String">
+        DELETE IMAGE WHERE IID = #{id}
+    </delete>
+
+    <insert id="insertImage" parameterType="winning.bean.Image">
+        INSERT INTO IMAGE (INAME, IFILEPATH, IURL) VALUES (#{name}, #{filepath}, #{url})
+    </insert>
+
+    <insert id="insertBatchImage" parameterType="java.util.List">
+        INSERT INTO IMAGE (INAME, IFILEPATH, IURL) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item.iName,jdbcType=String},
+            #{item.iFilepath,jdbcType=String},
+            #{item.iUrl,jdbcType=String})
+        </foreach>
+
+    </insert>
+
+
+</mapper>
