@@ -59,9 +59,9 @@ public class ArticleService {
             }
 
             if(!isUndefined(paramMap.get("AID"))){
-                a = articleDao.insertArticle(article);
-            }else{
                 a = articleDao.updateArticle(article);
+            }else{
+                a = articleDao.insertArticle(article);
             }
 
 

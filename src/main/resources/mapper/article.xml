@@ -14,7 +14,7 @@
 
     <update id="updateArticle" parameterType="winning.bean.Article">
         UPDATE ARTICLE SET TITLE = #{title}, TAG = #{tag}, AUTHOR = #{author}, ACOMMENT = #{acomment}, CREATETIME = #{createTime},
-        BODYPART = #{bodypart}, IMAGES = #{images}, ATTACHMENTS = #{attachments}, MCID = #{mcId}  WHERE AID = #{ad}
+        BODYPART = #{bodypart}, IMAGES = #{images}, ATTACHMENTS = #{attachments}, MCID = #{mcId}  WHERE AID = #{aId}
     </update>
 
     <delete id="deleteArticleById" parameterType="java.math.BigDecimal">
