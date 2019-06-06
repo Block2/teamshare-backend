@@ -22,8 +22,8 @@
     </delete>
 
     <insert id="insertArticle" parameterType="winning.bean.Article">
-        INSERT INTO ARTICLE (TITLE, TAG, AUTHOR,ACOMMENT, BODYPART, IMAGES, ATTACHMENTS, MCID) VALUES
-        (#{title}, #{tag}, #{author}, #{acomment}, #{bodypart}, #{images}, #{attachments}, #{mcId})
+        INSERT INTO ARTICLE (TITLE, TAG, AUTHOR,ACOMMENT, BODYPART, CREATETIME, MCID) VALUES
+        (#{title}, #{tag}, #{author}, #{acomment}, #{bodypart}, #{createTime}, #{mcId})
     </insert>
 
 </mapper>
