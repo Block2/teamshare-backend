@@ -83,7 +83,20 @@ public class ArticleService {
         if (paramMap.get("AID").startsWith("unDefined")) {
             return null;
         }
-        return articleDao.getArticleById(paramMap.get("AID"));
+        Map map = articleDao.getArticleById(paramMap.get("AID"));
+        if(map.get("BODYPART") != null) {
+            byte[] bodyPart = (byte[]) map.get("BODYPART");
+            if(bodyPart.length != 0) {
+                try {
+                    String bodyPartStr = new String(bodyPart, "utf8");
+                    map.put("BODYPART", bodyPartStr);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return map;
     }
 
     @Transactional
