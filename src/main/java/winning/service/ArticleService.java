@@ -9,6 +9,7 @@ import org.springframework.util.LinkedCaseInsensitiveMap;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,9 @@ public class ArticleService {
             if (!isUndefined(paramMap.get("CREATETIME"))) {
                 article.setCreateTime(paramMap.get("CREATETIME"));
             }
+            if (!isUndefined(paramMap.get("MCID"))) {
+                article.setMcId(new BigDecimal(paramMap.get("MCID")));
+            }
 
             a = articleDao.insertArticle(article);
         } catch (UnsupportedEncodingException e) {
@@ -83,7 +87,7 @@ public class ArticleService {
         if (paramMap.get("AID").startsWith("unDefined")) {
             return null;
         }
-        Map map = articleDao.getArticleById(paramMap.get("AID"));
+        Map map = articleDao.getArticleById(new BigDecimal(paramMap.get("AID")));
         if(map.get("BODYPART") != null) {
             byte[] bodyPart = (byte[]) map.get("BODYPART");
             if(bodyPart.length != 0) {

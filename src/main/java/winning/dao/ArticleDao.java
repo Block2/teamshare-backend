@@ -4,6 +4,7 @@ import winning.bean.Article;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import java.util.Map;
 public interface ArticleDao {
 
     List<Map> getArticlesByMcid(@Param("mcid") String mcid);
-    Map getArticleById(@Param("id") String id);
+    Map getArticleById(@Param("id") BigDecimal id);
     int updateArticle(Article article);
     int deleteArticleById(@Param("id") String id);
     int insertArticle(Article article);
