@@ -28,7 +28,7 @@ public class MColumnService {
     public Map getColumnById(Map<String, String> paramMap) {
 
         Map map=new LinkedCaseInsensitiveMap();
-        return mColumnDao.getColumnById(paramMap.get("MCID"));
+        return mColumnDao.getColumnById(new BigDecimal(paramMap.get("MCID")));
     }
 
 
@@ -37,7 +37,8 @@ public class MColumnService {
 
         Map map=new LinkedCaseInsensitiveMap();
         List<Map> columnList = new ArrayList<Map>();
-        List<Map> list =  mColumnDao.getColumnsByTmid(paramMap.get("TMID"));
+
+        List<Map> list =  mColumnDao.getColumnsByTmid(new BigDecimal(paramMap.get("TMID")));
 
         if(list != null && !list.isEmpty()){
 
@@ -46,7 +47,7 @@ public class MColumnService {
                 Map columnMap = new HashMap();
                 //将MCID转成String类型
                 column.put("MCID",((BigDecimal)column.get("MCID")).toString());
-                List<Map> articles = mColumnDao.getArticlesByMcid((String) column.get("MCID"));
+                List<Map> articles = mColumnDao.getArticlesByMcid(new BigDecimal((String)column.get("MCID")));
                 if(articles != null && !articles.isEmpty()) {
                     for(Map article : articles){
                         //将AID转成String类型
@@ -81,7 +82,7 @@ public class MColumnService {
     public Map deleteColumnById(Map<String, String> paramMap) {
 
         Map map=new LinkedCaseInsensitiveMap();
-        int a =  mColumnDao.deleteColumnById(paramMap.get("MCID"));
+        int a =  mColumnDao.deleteColumnById(new BigDecimal(paramMap.get("MCID")));
 
         String msg = a > 0? "删除成功" : "删除失败";
         map.put("IS_EXIST", msg);

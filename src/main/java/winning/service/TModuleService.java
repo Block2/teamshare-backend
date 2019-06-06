@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +60,7 @@ public class TModuleService {
     public Map deleteModuleById(Map<String, String> paramMap){
 
         Map map=new LinkedCaseInsensitiveMap();
-        int a = tModuleDao.deleteModuleById(paramMap.get("TMID"));
+        int a = tModuleDao.deleteModuleById(new BigDecimal(paramMap.get("TMID")));
 
         String msg = a > 0? "删除成功" : "删除失败";
         map.put("IS_EXIST", msg);

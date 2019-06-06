@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="winning.dao.MColumnDao">
 
-    <select id="getColumnById" resultType="java.util.Map">
+    <select id="getColumnById" parameterType="java.math.BigDecimal" resultType="java.util.Map">
         SELECT * FROM MCOLUMN WHERE MCID = #{id}
     </select>
 
-    <select id="getColumnsByTmid" parameterType="java.lang.String" resultType="java.util.Map">
-        SELECT MCID, MCNAME FROM MCOLUMN WHERE TMID = #{tmid}
+    <select id="getColumnsByTmid" parameterType="java.math.BigDecimal" resultType="java.util.Map">
+        SELECT MCID, MCNAME,TMID FROM MCOLUMN WHERE TMID = #{tmid}
     </select>
 
-    <select id="getArticlesByMcid" parameterType="java.lang.String" resultType="java.util.Map">
+    <select id="getArticlesByMcid" parameterType="java.math.BigDecimal" resultType="java.util.Map">
         SELECT AID, TITLE FROM ARTICLE WHERE MCID = #{mcid}
     </select>
 
@@ -20,7 +20,7 @@
         UPDATE MCOLUMN SET MCNAME  = #{mcName}, MCCOMMENT = #{mcComment} WHERE　MCID = #{mcId}
     </update>
 
-    <delete id="deleteColumnById" parameterType="java.lang.String">
+    <delete id="deleteColumnById" parameterType="java.math.BigDecimal">
         DELETE MCOLUMN WHERE MCID = #{id}
     </delete>
 

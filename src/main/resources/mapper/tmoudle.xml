@@ -13,7 +13,7 @@
         UPDATE TModule SET TMNAME  = #{name}, TMCOMMENT = #{comment} WHERE　TMID = #{id}
     </update>
 
-    <delete id="deleteModuleById" parameterType="java.lang.String">
+    <delete id="deleteModuleById" parameterType="java.math.BigDecimal">
         DELETE TModule WHERE TMID = #{id}
     </delete>
 

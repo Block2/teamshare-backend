@@ -27,7 +27,7 @@ public class ArticleService {
     public Map getArticleByMcid(Map<String, String> paramMap) {
 
         Map map = new LinkedCaseInsensitiveMap();
-        List<Map> list = articleDao.getArticlesByMcid(paramMap.get("MCID"));
+        List<Map> list = articleDao.getArticlesByMcid(new BigDecimal(paramMap.get("MCID")));
         map.put("ARTICLE_LIST", list);
         return map;
     }
@@ -58,7 +58,13 @@ public class ArticleService {
                 article.setMcId(new BigDecimal(paramMap.get("MCID")));
             }
 
-            a = articleDao.insertArticle(article);
+            if(!isUndefined(paramMap.get("AID"))){
+                a = articleDao.insertArticle(article);
+            }else{
+                a = articleDao.updateArticle(article);
+            }
+
+
         } catch (UnsupportedEncodingException e) {
             a = 0;
         }
@@ -84,7 +90,7 @@ public class ArticleService {
     @Transactional
     public Map getArticleById(Map<String, String> paramMap) {
 
-        if (paramMap.get("AID").startsWith("unDefined")) {
+        if (isUndefined(paramMap.get("AID"))) {
             return null;
         }
         Map map = articleDao.getArticleById(new BigDecimal(paramMap.get("AID")));
@@ -108,7 +114,7 @@ public class ArticleService {
 
         Map map = new LinkedCaseInsensitiveMap();
 
-        int a = articleDao.deleteArticleById(paramMap.get("AID"));
+        int a = articleDao.deleteArticleById(new BigDecimal(paramMap.get("AID")));
 
         String msg = a > 0 ? "删除成功" : "删除失败";
         map.put("IS_EXIST", msg);

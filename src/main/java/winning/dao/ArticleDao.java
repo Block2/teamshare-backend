@@ -14,10 +14,10 @@ import java.util.Map;
 @Mapper
 public interface ArticleDao {
 
-    List<Map> getArticlesByMcid(@Param("mcid") String mcid);
+    List<Map> getArticlesByMcid(@Param("mcid") BigDecimal mcid);
     Map getArticleById(@Param("id") BigDecimal id);
     int updateArticle(Article article);
-    int deleteArticleById(@Param("id") String id);
+    int deleteArticleById(@Param("id") BigDecimal id);
     int insertArticle(Article article);
 
 }
