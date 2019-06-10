@@ -65,7 +65,6 @@ public class ArticleService {
                 a = articleDao.insertArticle(article);
             }
 
-
         } catch (UnsupportedEncodingException e) {
             a = 0;
         }

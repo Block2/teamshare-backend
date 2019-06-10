@@ -25,9 +25,9 @@ public class CommonService {
 
         Map map = new LinkedCaseInsensitiveMap();
         Map result = new HashMap();
-        if(paramMap.get("AID") != null && !paramMap.get("AID").equals("")){
+        if(!isUndefined(paramMap.get("AID"))){
             result = commonDao.getPathInfoByAid(new BigDecimal(paramMap.get("AID")));
-        } else if(paramMap.get("MCID") != null && !paramMap.get("MCID").equals("")) {
+        } else if(!isUndefined(paramMap.get("MCID"))) {
             result = commonDao.getPathInfoByAid(new BigDecimal(paramMap.get("MCID")));
         }
         if(result.isEmpty()){
@@ -38,13 +38,8 @@ public class CommonService {
         return map;
     }
 
-    @Transactional
-    public Map getPathInfoByAid(Map<String, String> paramMap) {
-
-        Map map = new LinkedCaseInsensitiveMap();
-        Map list = commonDao.getPathInfoByAid(new BigDecimal(paramMap.get("MCID")));
-        map.put("pathinfo", list);
-        return map;
+    private boolean isUndefined(String str) {
+        return str == null || "".equals(str.trim()) || str.trim().equals("undefined");
     }
 
 }
