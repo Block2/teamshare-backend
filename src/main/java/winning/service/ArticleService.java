@@ -59,6 +59,7 @@ public class ArticleService {
             }
 
             if(!isUndefined(paramMap.get("AID"))){
+                article.setaId(new BigDecimal(paramMap.get("AID")));
                 a = articleDao.updateArticle(article);
             }else{
                 a = articleDao.insertArticle(article);
