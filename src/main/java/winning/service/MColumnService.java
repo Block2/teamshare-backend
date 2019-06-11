@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 import winning.bean.MColumn;
 import winning.dao.MColumnDao;
-import winning.util.JsonUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -69,7 +68,11 @@ public class MColumnService {
     public Map updateColumn(Map<String, String> paramMap) {
 
         Map map=new LinkedCaseInsensitiveMap();
-        MColumn column = JsonUtils.jsonStrToBean(paramMap.get("COLUMN"), MColumn.class);
+        MColumn column = new MColumn();
+        column.setMcName(paramMap.get("MCNAME"));
+        column.setTmId(new BigDecimal(paramMap.get("TMID")));
+        column.setMcId(new BigDecimal(paramMap.get("MCID")));
+        
         int a =  mColumnDao.updateColumn(column);
 
         String msg = a > 0? "修改成功" : "修改失败";
@@ -93,7 +96,9 @@ public class MColumnService {
     public Map insertColumn(Map<String, String> paramMap) {
 
         Map map=new LinkedCaseInsensitiveMap();
-        MColumn column = JsonUtils.jsonStrToBean(paramMap.get("COLUMN"), MColumn.class);
+        MColumn column = new MColumn();
+        column.setMcName(paramMap.get("MCNAME"));
+        column.setTmId(new BigDecimal(paramMap.get("TMID")));
         int a =  mColumnDao.insertColumn(column);
 
         String msg = a > 0? "保存成功" : "保存失败";

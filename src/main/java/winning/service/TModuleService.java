@@ -1,11 +1,10 @@
 package winning.service;
 
-import winning.bean.TModule;
-import winning.dao.TModuleDao;
-import winning.util.JsonUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedCaseInsensitiveMap;
+import winning.bean.TModule;
+import winning.dao.TModuleDao;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -35,7 +34,8 @@ public class TModuleService {
     public Map insertModule(Map<String, String> paramMap){
 
         Map map=new LinkedCaseInsensitiveMap();
-        TModule module = JsonUtils.jsonStrToBean("MODULE", TModule.class);
+        TModule module = new TModule();
+        module.setTmName(paramMap.get("TMNAME"));
         int a = tModuleDao.insertModule(module);
 
         String msg = a > 0? "保存成功" : "保存失败";
@@ -48,7 +48,9 @@ public class TModuleService {
     public Map updateModule(Map<String, String> paramMap){
 
         Map map=new LinkedCaseInsensitiveMap();
-        TModule module = JsonUtils.jsonStrToBean("MODULE", TModule.class);
+        TModule module = new TModule();
+        module.setTmName(paramMap.get("TMNAME"));
+        module.setTmId(paramMap.get("TMID"));
         int a = tModuleDao.updateModule(module);
 
         String msg = a > 0? "修改成功" : "修改失败";
