@@ -25,7 +25,7 @@
     </delete>
 
     <insert id="insertColumn" parameterType="winning.bean.MColumn">
-        INSERT INTO TMoudle (MCNAME, MCCOMMENT, TMID) VALUES (#{mcName}, #{mcComment}, #{tmId})
+        INSERT INTO MCOLUMN (MCNAME, MCCOMMENT, TMID) VALUES (#{mcName}, #{mcComment}, #{tmId})
     </insert>
 
 </mapper>

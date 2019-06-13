@@ -28,7 +28,7 @@ public class CommonService {
         if(!isUndefined(paramMap.get("AID"))){
             result = commonDao.getPathInfoByAid(new BigDecimal(paramMap.get("AID")));
         } else if(!isUndefined(paramMap.get("MCID"))) {
-            result = commonDao.getPathInfoByAid(new BigDecimal(paramMap.get("MCID")));
+            result = commonDao.getPathInfoByMcid(new BigDecimal(paramMap.get("MCID")));
         }
         if(result.isEmpty()){
             map.put("pathInfo", "不合法的路径");

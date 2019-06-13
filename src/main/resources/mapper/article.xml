@@ -5,7 +5,7 @@
 <mapper namespace="winning.dao.ArticleDao">
 
     <select id="getArticlesByMcid" parameterType="java.math.BigDecimal" resultType="java.util.Map">
-        SELECT AID, TITLE FROM ARTICLE WHERE MCID = #{mcid}
+        SELECT AID, TITLE, ACOMMENT, CREATETIME, AUTHOR,TAG FROM ARTICLE WHERE MCID = #{mcid}
     </select>
 
     <select id="getArticleById" parameterType="java.math.BigDecimal" resultType="java.util.Map">
