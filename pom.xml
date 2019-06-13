@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.winning</groupId>
-	<artifactId>teamshare2</artifactId>
+	<artifactId>teamshare-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>teamshare2</name>
+	<name>teamshare-backend</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
