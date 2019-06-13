@@ -21,7 +21,7 @@ public class CommonController {
     private CommonService commonService;
 
     @RequestMapping("/getPathInfo")
-    public Map insertArticle(HttpServletRequest request){
+    public Map getPathInfo(HttpServletRequest request){
         Map<String,String> paramMap= RequestUtils.getRequestParamMap(request);
         return commonService.getPathInfo(paramMap);
     }
