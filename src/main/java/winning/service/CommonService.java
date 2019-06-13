@@ -30,7 +30,7 @@ public class CommonService {
         } else if(!isUndefined(paramMap.get("MCID"))) {
             result = commonDao.getPathInfoByMcid(new BigDecimal(paramMap.get("MCID")));
         }
-        if(result.isEmpty()){
+        if(result==null || result.isEmpty()){
             map.put("pathInfo", "不合法的路径");
         }else{
             map.put("pathInfo", result);

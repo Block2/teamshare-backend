@@ -94,7 +94,7 @@ public class ArticleService {
             return null;
         }
         Map map = articleDao.getArticleById(new BigDecimal(paramMap.get("AID")));
-        if(map.get("BODYPART") != null) {
+        if(map != null && map.get("BODYPART") != null) {
             byte[] bodyPart = (byte[]) map.get("BODYPART");
             if(bodyPart.length != 0) {
                 try {
