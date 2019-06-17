@@ -10,8 +10,9 @@
 	</parent>
 	<groupId>com.winning</groupId>
 	<artifactId>teamshare-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>teamshare-backend</name>
+	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

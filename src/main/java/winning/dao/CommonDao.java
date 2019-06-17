@@ -15,4 +15,7 @@ public interface CommonDao {
     Map getPathInfoByMcid(@Param("mcid") BigDecimal mcid);
     Map getPathInfoByAid(@Param("aid") BigDecimal aid);
 
+    Map getUserInfo(@Param("loginName") String loginName, @Param("password") String password);
+    Map getUserInfoByUserId(@Param("userId") BigDecimal userId);
+
 }

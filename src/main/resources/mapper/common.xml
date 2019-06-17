@@ -13,4 +13,13 @@
     </select>
 
 
+    <select id="getUserInfo" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT USERID, USERNAME, readAndWriteRight FROM TUSER WHERE LOGINNAME = #{loginName} AND PASSWORD = #{password}
+    </select>
+
+    <select id="getUserInfoByUserId" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT USERID, USERNAME, readAndWriteRight FROM TUSER WHERE USERID = #{userId}
+    </select>
+
+
 </mapper>

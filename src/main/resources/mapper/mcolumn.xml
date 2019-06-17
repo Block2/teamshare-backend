@@ -9,7 +9,7 @@
     </select>
 
     <select id="getColumnsByTmid" parameterType="java.math.BigDecimal" resultType="java.util.Map">
-        SELECT MCID, MCNAME,TMID FROM MCOLUMN WHERE TMID = #{tmid}
+        SELECT MCID, MCNAME,TMID, ROUTE_PATH FROM MCOLUMN WHERE TMID = #{tmid}
     </select>
 
     <select id="getArticlesByMcid" parameterType="java.math.BigDecimal" resultType="java.util.Map">

@@ -26,4 +26,16 @@ public class CommonController {
         return commonService.getPathInfo(paramMap);
     }
 
+    @RequestMapping("/getUserInfo")
+    public Map getUserInfo(HttpServletRequest request){
+        Map<String,String> paramMap= RequestUtils.getRequestParamMap(request);
+        return commonService.getUserInfo(paramMap);
+    }
+
+    @RequestMapping("/getUserInfoByUserId")
+    public Map getUserInfoByUserId(HttpServletRequest request){
+        Map<String,String> paramMap= RequestUtils.getRequestParamMap(request);
+        return commonService.getUserInfoByUserId(paramMap);
+    }
+
 }

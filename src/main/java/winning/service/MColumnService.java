@@ -8,10 +8,7 @@ import winning.dao.MColumnDao;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by xwf on 2019/6/4.
@@ -42,23 +39,30 @@ public class MColumnService {
 
             for(Map column : list) {
                 Map columnMap = new HashMap();
-                List<Map> articles = mColumnDao.getArticlesByMcid((BigDecimal) column.get("MCID"));
-                if(articles != null && !articles.isEmpty()) {
-                    List<Map> articleList = new ArrayList<Map>();
-                    for(Map article : articles){
-                        //将AID转成String类型
-                        article.put("id", ((BigDecimal)article.get("AID")).toString());
-                        article.put("label", (String)article.get("TITLE"));
-                        articleList.add(article);
-                    }
-                    columnMap.put("children", articleList);
-                }
                 columnMap.put("label", column.get("MCNAME"));
                 columnMap.put("id", ((BigDecimal)column.get("MCID")).toString());
+                if(!isUndefined((String)column.get("ROUTE_PATH"))){
+                    columnMap.put("route_path", (String)column.get("ROUTE_PATH"));
+                }else {
+                    List<Map> articles = mColumnDao.getArticlesByMcid((BigDecimal) column.get("MCID"));
+                    if (articles != null && !articles.isEmpty()) {
+                        List<Map> articleList = new ArrayList<Map>();
+                        for (Map article : articles) {
+                            //将AID转成String类型
+                            article.put("id", ((BigDecimal) article.get("AID")).toString());
+                            article.put("label", (String) article.get("TITLE"));
+                            articleList.add(article);
+                        }
+                        columnMap.put("children", articleList);
+                    }
+                }
+
                 columnList.add(columnMap);
             }
         }
 
+        //对columnList进行排序，将有指定route_path的栏目放置在最后面
+        Collections.sort(columnList, new ColumnInfoMapComparator());
         map.put("COLUMN_LIST", columnList);
         return map;
     }
@@ -105,6 +109,23 @@ public class MColumnService {
         String msg = a > 0? "保存成功" : "保存失败";
         map.put("IS_EXIST", msg);
         return map;
+    }
+
+    private boolean isUndefined(String str) {
+        return str == null || "".equals(str.trim()) || str.trim().equals("undefined");
+    }
+
+    class ColumnInfoMapComparator implements Comparator {
+        public int compare(Object o1, Object o2) {
+
+
+            Map s1 = (Map) o1;
+            Map s2 = (Map) o2;
+            if(!isUndefined((String)s2.get("route_path"))){
+                return -1;
+            }
+            return 1;
+        }
     }
 
 }
