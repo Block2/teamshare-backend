@@ -8,6 +8,8 @@ import winning.dao.TModuleDao;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +28,7 @@ public class TModuleService {
 
         Map map=new LinkedCaseInsensitiveMap();
         List<Map> list =  tModuleDao.getAllModules();
+        Collections.sort(list, new ModuleMapComparator());
         map.put("MODULE_LIST", list);
         return map;
     }
@@ -36,6 +39,7 @@ public class TModuleService {
         Map map=new LinkedCaseInsensitiveMap();
         TModule module = new TModule();
         module.setTmName(paramMap.get("TMNAME"));
+        module.setIdx(Short.valueOf(paramMap.get("IDX")));
         int a = tModuleDao.insertModule(module);
 
         String msg = a > 0? "保存成功" : "保存失败";
@@ -69,5 +73,12 @@ public class TModuleService {
         return map;
     }
 
+    class ModuleMapComparator implements Comparator {
+        public int compare(Object o1, Object o2) {
 
+            Map s1 = (Map) o1;
+            Map s2 = (Map) o2;
+            return (Short) s1.get("IDX") > (Short) s2.get("IDX") ? 1 : -1;
+        }
+    }
 }

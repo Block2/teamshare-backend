@@ -5,7 +5,7 @@
 <mapper namespace="winning.dao.TModuleDao">
 
     <select id="getAllModules" resultType="java.util.Map">
-        SELECT TMID, TMNAME, TMCOMMENT FROM TModule
+        SELECT TMID, TMNAME, TMCOMMENT, IDX FROM TModule
     </select>
 
 
@@ -18,7 +18,7 @@
     </delete>
 
     <insert id="insertModule" parameterType="winning.bean.TModule">
-        INSERT INTO TModule (TMNAME, TMCOMMENT) VALUES (#{name}, #{comment})
+        INSERT INTO TModule (TMNAME, TMCOMMENT, IDX) VALUES (#{name}, #{comment}, #{idx})
     </insert>
 
 </mapper>
